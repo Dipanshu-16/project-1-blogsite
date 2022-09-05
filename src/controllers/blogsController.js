@@ -1,3 +1,4 @@
+
 const blogModel = require('../models/blogModel')
 
 const deleteBlogsById = async function(req, res){
@@ -24,4 +25,19 @@ const deleteBlogsByQuery = async function(req, res){
     }
 }
 
+
+
+const createBlogs = async function (req, res) {
+
+    try {
+        let data=req.body
+        let saveData= await blogModel.create(data)
+        return res.status(201).send({status:true,data:saveData})
+    }
+    catch (err) {
+    
+        res.status(500).send({status:false, msg: err.message })
+    }
+}
+module.exports.createBlogs=createBlogs
 module.exports = { deleteBlogsById ,deleteBlogsByQuery }
